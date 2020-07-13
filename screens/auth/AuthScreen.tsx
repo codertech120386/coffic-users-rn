@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Platform } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   cofficLogo: {
-    marginTop: 60,
-    marginBottom: 10,
+    marginTop: Platform.OS === "android" ? 60 : 30,
+    marginBottom: Platform.OS === "android" ? 10 : 20,
   },
   vCenter: {
     width: "100%",
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   logoLogin: {
-    marginVertical: 60,
+    marginVertical: Platform.OS === "android" ? 60 : 30,
     maxWidth: 250,
     alignItems: "center",
   },
   logoLoginText: {
     width: "80%",
-    marginTop: 50,
+    marginTop: Platform.OS === "android" ? 50 : 30,
     marginBottom: 80,
     fontFamily: "montserrat",
     fontStyle: "normal",
