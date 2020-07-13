@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const USER_PROFESSIONAL_DETAILS = gql`
-  query UserProfessionalDetails($userToken: String!) {
-    userProfessionalDetails(userToken: $userToken) {
+  query UserProfessionalDetails {
+    userProfessionalDetails {
       id
       designation
       organization
@@ -18,8 +18,8 @@ export const USER_PROFESSIONAL_DETAILS = gql`
 `;
 
 export const USER_PERSONAL_DETAILS_MINI = gql`
-  query UserPersonalDetails($userToken: String!) {
-    userPersonalDetails(userToken: $userToken) {
+  query UserPersonalDetails {
+    userPersonalDetails {
       id
       name
       email
@@ -29,8 +29,8 @@ export const USER_PERSONAL_DETAILS_MINI = gql`
 `;
 
 export const USER_PERSONAL_DETAILS = gql`
-  query UserPersonalDetails($userToken: String!) {
-    userPersonalDetails(userToken: $userToken) {
+  query UserPersonalDetails {
+    userPersonalDetails {
       id
       name
       phone

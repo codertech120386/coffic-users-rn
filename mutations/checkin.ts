@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CHECKIN = gql`
-  mutation Checkin($userToken: String!, $workspaceId: Int!) {
-    checkin(userToken: $userToken, workspaceId: $workspaceId) {
+  mutation Checkin($workspaceId: Int!) {
+    checkin(workspaceId: $workspaceId) {
       id
       checked_in_date
       created_at

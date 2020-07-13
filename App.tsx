@@ -8,6 +8,7 @@ import { HttpLink } from "apollo-link-http";
 
 import { AppNavigator } from "./navigation/AppNavigator";
 import { getUrl } from "./config";
+import AuthContextProvider from "./context/AuthContext";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -48,8 +49,10 @@ export default function App() {
   }
 
   return (
-    <ApolloProvider client={client}>
-      <AppNavigator />
-    </ApolloProvider>
+    <AuthContextProvider>
+      <ApolloProvider client={client}>
+        <AppNavigator />
+      </ApolloProvider>
+    </AuthContextProvider>
   );
 }

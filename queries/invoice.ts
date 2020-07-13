@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_INVOICE = gql`
-  query GetInvoice($userToken: String!, $paymentId: Int!) {
-    invoice(userToken: $userToken, paymentId: $paymentId) {
+  query GetInvoice($payment_id: Int!) {
+    invoice(payment_id: $payment_id) {
       id
       gst_number
       company

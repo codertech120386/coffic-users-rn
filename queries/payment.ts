@@ -34,8 +34,8 @@ export const GET_SUBSCRIPTION = gql`
 `;
 
 export const USER_SUBSCRIPTIONS = gql`
-  query UserSubscriptions($userToken: String!, $status: String!) {
-    userSubscriptions(userToken: $userToken, status: $status) {
+  query UserSubscriptions($status: String!) {
+    userSubscriptions(status: $status) {
       id
       start_date
       end_date
@@ -67,8 +67,8 @@ export const USER_SUBSCRIPTIONS = gql`
 `;
 
 export const USER_PAYMENTS = gql`
-  query UserPayments($userToken: String!) {
-    userPayments(userToken: $userToken) {
+  query UserPayments {
+    userPayments {
       id
       created_at
       plan {

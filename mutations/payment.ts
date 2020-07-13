@@ -2,21 +2,24 @@ import gql from 'graphql-tag';
 
 export const CREATE_ORDER = gql`
   mutation createOrder(
-    $userToken: String!
     $planId: Int!
     $numberOfSeats: Int!
     $gateway: String!
     $couponCode: String
+    $startDate: String
+    $endDate: String
   ) {
     createOrder(
-      userToken: $userToken
       planId: $planId
       numberOfSeats: $numberOfSeats
       gateway: $gateway
       couponCode: $couponCode
+      startDate: $startDate
+      endDate: $endDate
     ) {
       order_id
       amount
+      subscription_id
       user {
         id
         name
@@ -29,7 +32,6 @@ export const CREATE_ORDER = gql`
 
 export const UPDATE_ORDER = gql`
   mutation updateOrder(
-    $userToken: String!
     $planId: Int!
     $numberOfSeats: Int!
     $gateway: String!
@@ -40,7 +42,6 @@ export const UPDATE_ORDER = gql`
     $couponCode: String
   ) {
     updateOrder(
-      userToken: $userToken
       planId: $planId
       numberOfSeats: $numberOfSeats
       gateway: $gateway

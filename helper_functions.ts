@@ -1,4 +1,5 @@
 import Validations from "./validations";
+import { AsyncStorage } from "react-native";
 
 export const convertTimeTo12HourFormat = (time: string) => {
   const timeArray = time.split(":");
@@ -19,7 +20,6 @@ export const validateInputs = (inputObject: any, formValues: any) => {
     inputObject[inputField].map((arg: any) => {
       const argsArray = arg.split(":");
       const functionName = argsArray[0];
-      console.log("formValues", formValues[inputField]);
       const [result, message] = Validations[functionName](
         formValues[inputField],
         inputField,
@@ -32,4 +32,21 @@ export const validateInputs = (inputObject: any, formValues: any) => {
     });
   });
   return [isValid, errors];
+};
+
+export const setObject = async (key: string, object: any) => {
+  await AsyncStorage.setItem(key, JSON.stringify(object));
+};
+
+export const setItem = async (key: string, value: any) => {
+  await AsyncStorage.setItem(key, value);
+};
+
+export const getItem = async (key: string) => {
+  const value = await AsyncStorage.getItem(key);
+  return value;
+};
+
+export const removeItem = async (key: string) => {
+  await AsyncStorage.removeItem(key);
 };

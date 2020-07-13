@@ -2,18 +2,12 @@ import gql from 'graphql-tag';
 
 export const GET_CHECKED_IN_DATES = gql`
   query GetCheckedInDates(
-    $userToken: String!
     $startDate: String!
-    $endDate: String!
     $limit: Int!
-    $reverse: Boolean
   ) {
-    userCheckinHistory(
-      userToken: $userToken
-      startDate: $startDate
-      endDate: $endDate
+    userCheckedinDates(
+      startDate: $startDate,
       limit: $limit
-      reverse: $reverse
     ) {
       checked_in_date
     }
@@ -21,15 +15,13 @@ export const GET_CHECKED_IN_DATES = gql`
 `;
 
 export const GET_CHECKED_IN_HISTORY = gql`
-  query GetCheckedInDates(
-    $userToken: String!
+  query GetCheckedInHistory(
     $startDate: String!
     $endDate: String!
     $limit: Int!
     $reverse: Boolean
   ) {
     userCheckinHistory(
-      userToken: $userToken
       startDate: $startDate
       endDate: $endDate
       limit: $limit

@@ -2,14 +2,12 @@ import gql from 'graphql-tag';
 
 export const REQUEST_INVOICE_PDF = gql`
   mutation RequestInvoicePDF(
-    $userToken: String!
     $paymentId: Int!
     $company: String
     $gstNumber: String
     $address: String
   ) {
     requestInvoicePDF(
-      userToken: $userToken
       paymentId: $paymentId
       company: $company
       gstNumber: $gstNumber

@@ -8,8 +8,8 @@ import {
   Item,
   Label,
   Input,
-  Button,
   Text,
+  Icon,
 } from "native-base";
 
 import { CustomText } from "../../components/ui/CustomText";
@@ -18,13 +18,15 @@ import { SIGNUP } from "../../mutations";
 import { validateInputs } from "../../helper_functions";
 
 import defaultStyles, { Colors } from "../../AppCss";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function RegisterScreen(props: any) {
   const [signUp, {}] = useMutation(SIGNUP);
   const [formValues, setFormValues] = useState<any>(null);
   const [validationErrors, setValidationErrors] = useState<any>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showToast, setShowToast] = useState<boolean>(true);
+  const [showToast, setShowToast] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
 
   const showToastBox = (message: string) => {
@@ -103,6 +105,10 @@ export default function RegisterScreen(props: any) {
     return defaultStyles.disabled;
   };
 
+  const login = () => {
+    props.navigation.navigate("Login");
+  };
+
   return (
     <Container>
       <Content style={styles.container}>
@@ -138,7 +144,7 @@ export default function RegisterScreen(props: any) {
             <Input
               keyboardType="email-address"
               onChangeText={(val) =>
-                setFormValues({ ...formValues, email: val })
+                setFormValues({ ...formValues, email: val.toLowerCase() })
               }
               onFocus={() => onInputFocusListener("email")}
             />
@@ -162,12 +168,24 @@ export default function RegisterScreen(props: any) {
           <Item floatingLabel last>
             <Label style={styles.floatingLabel}>Password</Label>
             <Input
-              secureTextEntry={true}
+              secureTextEntry={showPassword ? false : true}
               onChangeText={(val) =>
                 setFormValues({ ...formValues, password: val })
               }
               onFocus={() => onInputFocusListener("password")}
             />
+            {showPassword ? (
+              <Icon
+                name={"eye-off-outline"}
+                onPress={onShowPasswordClickListener}
+              />
+            ) : (
+              <Icon
+                name={"eye-outline"}
+                type="MaterialCommunityIcons"
+                onPress={onShowPasswordClickListener}
+              />
+            )}
           </Item>
 
           {validationErrors &&
@@ -210,18 +228,25 @@ export default function RegisterScreen(props: any) {
               </Text>
             )}
         </Form>
-        <Button
-          small
-          style={{ ...styles.registerButtonContainer, ...checkDisabled() }}
+
+        {/* ----- Form Submit Button ------ */}
+        <TouchableOpacity
           onPress={onSignupFormSubmitListener}
           disabled={!checkFormValues()}
         >
-          <CustomText style={styles.registerButtonText}>Register</CustomText>
-        </Button>
+          <View
+            style={{ ...styles.registerButtonContainer, ...checkDisabled() }}
+          >
+            <Text style={styles.registerButtonText}>Register</Text>
+          </View>
+        </TouchableOpacity>
+
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <CustomText>
             Already have an account?{" "}
-            <Text style={defaultStyles.link}>Log in</Text>
+            <Text style={defaultStyles.link} onPress={login}>
+              Log in
+            </Text>
           </CustomText>
         </View>
         {showToast && (
@@ -242,17 +267,17 @@ const styles = StyleSheet.create({
     fontFamily: "montserrat",
   },
   registerButtonContainer: {
-    maxWidth: "60%",
+    maxWidth: "50%",
     marginTop: 40,
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginLeft: "20%",
+    paddingVertical: 10,
+    marginLeft: "25%",
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
   },
   registerButtonText: {
     fontFamily: "montserrat-bold",
     color: "white",
     textAlign: "center",
-    paddingLeft: "30%",
     fontSize: 17,
   },
   errorText: {

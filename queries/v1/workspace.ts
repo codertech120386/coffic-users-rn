@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const V1_WORKSPACE_DETAILS_FROM_ID = gql`
-  query v1WorkspaceFromId($id: ID!, $token: String, $platform: String) {
-    v1Workspace(id: $id, token: $token, platform: $platform) {
+  query v1WorkspaceFromId($id: ID!) {
+    v1Workspace(id: $id) {
       id
       name
       description

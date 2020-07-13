@@ -148,8 +148,8 @@ export const GET_WORKSPACE_AMENITIES = gql`
 `;
 
 export const RECENTLY_SEARCH_WORKSPACES = gql`
-  query RecentlySearchedWorkspaces($userToken: String!) {
-    recentlySearchedWorkspaces(userToken: $userToken) {
+  query RecentlySearchedWorkspaces {
+    recentlySearchedWorkspaces {
       id
       updated_at
       workspace {

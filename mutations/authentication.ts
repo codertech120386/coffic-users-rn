@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const SIGNUP = gql`
   mutation Signup(
@@ -17,8 +17,8 @@ export const SIGNUP = gql`
 `;
 
 export const LOGIN = gql`
-  mutation Login($email: String!, $password: String!, $platform: String) {
-    login(email: $email, password: $password, platform: $platform) {
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       id
       name
       email
@@ -40,12 +40,8 @@ export const FORGOT_PASSWORD = gql`
 `;
 
 export const CHANGE_PASSWORD = gql`
-  mutation ChangePassword(
-    $password: String!
-    $code: String!
-    $platform: String!
-  ) {
-    changePassword(password: $password, code: $code, platform: $platform) {
+  mutation ChangePassword($password: String!, $code: String!) {
+    changePassword(password: $password, code: $code) {
       id
       name
       email
@@ -56,8 +52,8 @@ export const CHANGE_PASSWORD = gql`
 `;
 
 export const VERIFY_EMAIL = gql`
-  mutation VerifyEmail($code: String!, $platform: String!) {
-    verifyEmail(code: $code, platform: $platform) {
+  mutation VerifyEmail($code: String!) {
+    verifyEmail(code: $code) {
       id
       name
       email

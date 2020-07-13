@@ -2,7 +2,6 @@ import gql from 'graphql-tag';
 
 export const UPDATE_USER_PROFESSIONAL_DETAILS = gql`
   mutation UpdateUserProfessionalDetails(
-    $userToken: String!
     $designation: String
     $organization: String
     $industry: String
@@ -10,7 +9,6 @@ export const UPDATE_USER_PROFESSIONAL_DETAILS = gql`
     $description: String
   ) {
     updateUserProfessionalDetails(
-      userToken: $userToken
       designation: $designation
       organization: $organization
       industry: $industry
@@ -36,14 +34,8 @@ export const UPDATE_USER_PERSONAL_DETAILS = gql`
     $name: String!
     $gender: String
     $phone: String!
-    $userToken: String!
   ) {
-    updateUserPersonalDetails(
-      userToken: $userToken
-      name: $name
-      gender: $gender
-      phone: $phone
-    ) {
+    updateUserPersonalDetails(name: $name, gender: $gender, phone: $phone) {
       id
       name
       phone
