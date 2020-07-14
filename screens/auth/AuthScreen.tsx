@@ -1,12 +1,38 @@
 import React from "react";
-import { StyleSheet, View, Text, Button, Platform } from "react-native";
+import { StyleSheet, View, Text, Platform } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import * as Google from "expo-google-app-auth";
 
 import defaultStyles from "../../AppCss";
-import { CofficBigLogo, CreateNewAccountIcon } from "../../icons";
+import { CofficBigLogo } from "../../icons";
 
 const AuthScreen = (props: any) => {
+  async function signInWithGoogleAsync() {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId:
+          "288660621120-iu1r6dfllqummha4iio3nouiq539n37f.apps.googleusercontent.com",
+        iosClientId:
+          "288660621120-oojvna4l1nvrfhgeoura7cejel7cia5u.apps.googleusercontent.com",
+        scopes: ["profile", "email"],
+      });
+
+      if (result.type === "success") {
+        props.navigation.navigate("AuthPhone", {
+          email: result.user.email,
+          givenName: result.user.givenName,
+          familyName: result.user.familyName,
+        });
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  }
+
   const signUp = () => {
     props.navigation.navigate("Register");
   };
@@ -15,8 +41,12 @@ const AuthScreen = (props: any) => {
     props.navigation.navigate("Login");
   };
 
-  const termsClicked = () => {};
-  const privacyPolicyClicked = () => {};
+  const termsClicked = () => {
+    props.navigation.navigate("TermsAndConditions");
+  };
+  const privacyPolicyClicked = () => {
+    props.navigation.navigate("PrivacyPolicy");
+  };
 
   return (
     <View>
@@ -32,7 +62,7 @@ const AuthScreen = (props: any) => {
           </Text>
           {/* </View> */}
           <View style={styles.buttonContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={signInWithGoogleAsync}>
               <View
                 // onPress={() => ()}
                 style={{ ...styles.loginButton, ...styles.loginWithGoogle }}

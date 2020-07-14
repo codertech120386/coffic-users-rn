@@ -1,29 +1,20 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
-import {
-  Container,
-  Content,
-  Form,
-  Item,
-  Label,
-  Input,
-  Icon,
-} from "native-base";
+import { Container, Content, Form, Item, Label, Input } from "native-base";
 
-import { CHANGE_PASSWORD } from "../../mutations";
+import { FORGOT_PASSWORD } from "../../mutations";
 
 import { validateInputs } from "../../helper_functions";
 
 import defaultStyles, { Colors } from "../../AppCss";
 import { commonAuthStyles } from "../../styles/CommonAuthStyles";
 
-export default function ChangePasswordScreen(props: any) {
-  const [changePassword, {}] = useMutation(CHANGE_PASSWORD);
+export default function ResetPasswordScreen(props: any) {
+  const [forgotPassword, {}] = useMutation(FORGOT_PASSWORD);
 
   const [formValues, setFormValues] = useState<any>(null);
   const [validationErrors, setValidationErrors] = useState<any>(null);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showToast, setShowToast] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [focussedItem, setFocussedItem] = useState<string | null>(null);
@@ -50,29 +41,27 @@ export default function ChangePasswordScreen(props: any) {
     }, 3000);
   };
 
-  const onChangePasswordFormSubmitListener = async () => {
+  const onEmailFormSubmitListener = async () => {
     const [isValid, errors] = validateInputs(
       {
-        password: ["required", "minLength:6:characters"],
+        email: ["required", "email"],
       },
       formValues
     );
 
     if (isValid) {
-      const code =
-        props && props.route && props.route.params && props.route.params.code;
       try {
-        changePassword({
-          variables: { ...formValues, code },
+        forgotPassword({
+          variables: formValues,
         })
           .then(() => {
-            showToastBox("Your Password has been successfully reset .. ");
+            showToastBox("Reset Email sent to your email address .. ");
             setTimeout(() => {
-              props.navigation.navigate("Login");
+              props.navigation.navigate("Auth");
             }, 3000);
           })
           .catch((e) => {
-            showToastBox("Please enter a minimum 6 character password");
+            showToastBox("Please check your email and try again");
           });
       } catch (e) {
         showToastBox("Something went wrong .. Please try again later");
@@ -91,49 +80,33 @@ export default function ChangePasswordScreen(props: any) {
     setFocussedItem(field);
   };
 
-  const onShowPasswordClickListener = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <Container>
       <Content style={commonAuthStyles.container}>
         <Form>
-          {/* ----- Password ------ */}
+          {/* ----- Email ------ */}
           <Item floatingLabel last>
             <Label
               style={
-                focussedItem === "password"
+                focussedItem === "email"
                   ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
                   : commonAuthStyles.floatingLabel
               }
             >
-              Password
+              Email
             </Label>
             <Input
-              secureTextEntry={showPassword ? false : true}
+              keyboardType="email-address"
               onChangeText={(val) =>
-                setFormValues({ ...formValues, password: val })
+                setFormValues({ ...formValues, email: val.toLowerCase() })
               }
-              onFocus={() => onInputFocusListener("password")}
+              onFocus={() => onInputFocusListener("email")}
             />
-            {showPassword ? (
-              <Icon
-                name={"eye-off-outline"}
-                onPress={onShowPasswordClickListener}
-              />
-            ) : (
-              <Icon
-                name={"eye-outline"}
-                type="MaterialCommunityIcons"
-                onPress={onShowPasswordClickListener}
-              />
-            )}
           </Item>
 
           {validationErrors &&
-            validationErrors["password"] &&
-            validationErrors["password"].length > 0 && (
+            validationErrors["email"] &&
+            validationErrors["email"].length > 0 && (
               <Text
                 style={{
                   ...defaultStyles.danger,
@@ -141,14 +114,14 @@ export default function ChangePasswordScreen(props: any) {
                   ...commonAuthStyles.errorText,
                 }}
               >
-                {validationErrors["password"].join(" and ")}
+                {validationErrors["email"].join(" and ")}
               </Text>
             )}
         </Form>
 
         {/* ----- Form Submit Button ------ */}
         <TouchableOpacity
-          onPress={onChangePasswordFormSubmitListener}
+          onPress={onEmailFormSubmitListener}
           disabled={!checkFormValues()}
         >
           <View

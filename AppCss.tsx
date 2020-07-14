@@ -7,6 +7,10 @@ export const Colors = {
 };
 
 const defaultStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+  },
   textCenter: {
     textAlign: "center",
   },
@@ -27,6 +31,7 @@ const defaultStyles = StyleSheet.create({
     fontSize: 20,
   },
   h3Text: {
+    fontFamily: "montserrat-bold",
     fontSize: 18,
   },
   h4Text: {

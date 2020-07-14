@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 import {
   Container,
@@ -20,6 +20,7 @@ import { validateInputs } from "../../helper_functions";
 import defaultStyles, { Colors } from "../../AppCss";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { commonAuthStyles } from "../../styles/CommonAuthStyles";
 
 export default function RegisterScreen(props: any) {
   const [signUp, {}] = useMutation(SIGNUP);
@@ -28,6 +29,7 @@ export default function RegisterScreen(props: any) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showToast, setShowToast] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
+  const [focussedItem, setFocussedItem] = useState<string | null>(null);
 
   const showToastBox = (message: string) => {
     setShowToast(true);
@@ -79,6 +81,7 @@ export default function RegisterScreen(props: any) {
     const oldErrors: any = { ...validationErrors };
     delete oldErrors[field];
     setValidationErrors(oldErrors);
+    setFocussedItem(field);
   };
 
   const onShowPasswordClickListener = () => {
@@ -111,11 +114,19 @@ export default function RegisterScreen(props: any) {
 
   return (
     <Container>
-      <Content style={styles.container}>
+      <Content style={commonAuthStyles.container}>
         <Form>
           {/* ----- Name ------ */}
           <Item floatingLabel>
-            <Label style={styles.floatingLabel}>Name</Label>
+            <Label
+              style={
+                focussedItem === "name"
+                  ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
+                  : commonAuthStyles.floatingLabel
+              }
+            >
+              Name
+            </Label>
             <Input
               onChangeText={(val) =>
                 setFormValues({ ...formValues, name: val })
@@ -131,7 +142,7 @@ export default function RegisterScreen(props: any) {
                 style={{
                   ...defaultStyles.danger,
                   ...defaultStyles.dangerItalic,
-                  ...styles.errorText,
+                  ...commonAuthStyles.errorText,
                 }}
               >
                 {validationErrors["name"].join(" and ")}
@@ -140,7 +151,15 @@ export default function RegisterScreen(props: any) {
 
           {/* ----- Email ------ */}
           <Item floatingLabel last>
-            <Label style={styles.floatingLabel}>Email</Label>
+            <Label
+              style={
+                focussedItem === "email"
+                  ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
+                  : commonAuthStyles.floatingLabel
+              }
+            >
+              Email
+            </Label>
             <Input
               keyboardType="email-address"
               onChangeText={(val) =>
@@ -157,7 +176,7 @@ export default function RegisterScreen(props: any) {
                 style={{
                   ...defaultStyles.danger,
                   ...defaultStyles.dangerItalic,
-                  ...styles.errorText,
+                  ...commonAuthStyles.errorText,
                 }}
               >
                 {validationErrors["email"].join(" and ")}
@@ -166,7 +185,15 @@ export default function RegisterScreen(props: any) {
 
           {/* ----- Password ------ */}
           <Item floatingLabel last>
-            <Label style={styles.floatingLabel}>Password</Label>
+            <Label
+              style={
+                focussedItem === "password"
+                  ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
+                  : commonAuthStyles.floatingLabel
+              }
+            >
+              Password
+            </Label>
             <Input
               secureTextEntry={showPassword ? false : true}
               onChangeText={(val) =>
@@ -195,7 +222,7 @@ export default function RegisterScreen(props: any) {
                 style={{
                   ...defaultStyles.danger,
                   ...defaultStyles.dangerItalic,
-                  ...styles.errorText,
+                  ...commonAuthStyles.errorText,
                 }}
               >
                 {validationErrors["password"].join(" and ")}
@@ -204,7 +231,15 @@ export default function RegisterScreen(props: any) {
 
           {/* ----- Phone Number ------ */}
           <Item floatingLabel last>
-            <Label style={styles.floatingLabel}>Phone Number</Label>
+            <Label
+              style={
+                focussedItem === "phone"
+                  ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
+                  : commonAuthStyles.floatingLabel
+              }
+            >
+              Phone Number
+            </Label>
             <Input
               keyboardType="phone-pad"
               onChangeText={(val) =>
@@ -221,7 +256,7 @@ export default function RegisterScreen(props: any) {
                 style={{
                   ...defaultStyles.danger,
                   ...defaultStyles.dangerItalic,
-                  ...styles.errorText,
+                  ...commonAuthStyles.errorText,
                 }}
               >
                 {validationErrors["phone"].join(" and ")}
@@ -235,9 +270,12 @@ export default function RegisterScreen(props: any) {
           disabled={!checkFormValues()}
         >
           <View
-            style={{ ...styles.registerButtonContainer, ...checkDisabled() }}
+            style={{
+              ...commonAuthStyles.registerButtonContainer,
+              ...checkDisabled(),
+            }}
           >
-            <Text style={styles.registerButtonText}>Register</Text>
+            <Text style={commonAuthStyles.registerButtonText}>Register</Text>
           </View>
         </TouchableOpacity>
 
@@ -249,8 +287,10 @@ export default function RegisterScreen(props: any) {
             </Text>
           </CustomText>
         </View>
+
+        {/* ----- Error Toast Messages ------ */}
         {showToast && (
-          <View style={styles.toast}>
+          <View style={commonAuthStyles.toast}>
             <Text>{toastMessage}</Text>
           </View>
         )}
@@ -258,34 +298,3 @@ export default function RegisterScreen(props: any) {
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-  },
-  floatingLabel: {
-    fontFamily: "montserrat",
-  },
-  registerButtonContainer: {
-    maxWidth: "50%",
-    marginTop: 40,
-    paddingVertical: 10,
-    marginLeft: "25%",
-    backgroundColor: Colors.primary,
-    borderRadius: 10,
-  },
-  registerButtonText: {
-    fontFamily: "montserrat-bold",
-    color: "white",
-    textAlign: "center",
-    fontSize: 17,
-  },
-  errorText: {
-    fontSize: 14,
-  },
-  toast: {
-    backgroundColor: "yellow",
-    marginTop: "30%",
-    padding: 10,
-  },
-});

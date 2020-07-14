@@ -3,7 +3,10 @@ import { StyleSheet, Text } from "react-native";
 
 export const CustomText = (props: any) => {
   return (
-    <Text style={{ ...styles.textStyle, ...props.style }}>
+    <Text
+      style={{ ...styles.textStyle, ...props.style }}
+      onPress={props.onPress}
+    >
       {props.children}
     </Text>
   );

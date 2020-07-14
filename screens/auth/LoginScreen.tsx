@@ -8,7 +8,6 @@ import {
   Item,
   Label,
   Input,
-  Button,
   Icon,
 } from "native-base";
 
@@ -18,6 +17,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { CustomText } from "../../components/ui/CustomText";
 
 import defaultStyles, { Colors } from "../../AppCss";
+import { commonAuthStyles } from "../../styles/CommonAuthStyles";
 
 export default function LoginScreen(props: any) {
   const [login, {}] = useMutation(LOGIN);
@@ -26,6 +26,7 @@ export default function LoginScreen(props: any) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showToast, setShowToast] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
+  const [focussedItem, setFocussedItem] = useState<string | null>(null);
 
   const authContext = useContext(AuthContext);
 
@@ -104,6 +105,7 @@ export default function LoginScreen(props: any) {
     const oldErrors: any = { ...validationErrors };
     delete oldErrors[field];
     setValidationErrors(oldErrors);
+    setFocussedItem(field);
   };
   const onShowPasswordClickListener = () => {
     setShowPassword(!showPassword);
@@ -111,11 +113,19 @@ export default function LoginScreen(props: any) {
 
   return (
     <Container>
-      <Content style={styles.container}>
+      <Content style={commonAuthStyles.container}>
         <Form>
           {/* ----- Email ------ */}
           <Item floatingLabel last>
-            <Label style={styles.floatingLabel}>Email</Label>
+            <Label
+              style={
+                focussedItem === "email"
+                  ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
+                  : commonAuthStyles.floatingLabel
+              }
+            >
+              Email
+            </Label>
             <Input
               keyboardType="email-address"
               onChangeText={(val) =>
@@ -132,7 +142,7 @@ export default function LoginScreen(props: any) {
                 style={{
                   ...defaultStyles.danger,
                   ...defaultStyles.dangerItalic,
-                  ...styles.errorText,
+                  ...commonAuthStyles.errorText,
                 }}
               >
                 {validationErrors["email"].join(" and ")}
@@ -141,7 +151,15 @@ export default function LoginScreen(props: any) {
 
           {/* ----- Password ------ */}
           <Item floatingLabel last>
-            <Label style={styles.floatingLabel}>Password</Label>
+            <Label
+              style={
+                focussedItem === "password"
+                  ? { ...commonAuthStyles.floatingLabel, color: Colors.primary }
+                  : commonAuthStyles.floatingLabel
+              }
+            >
+              Password
+            </Label>
             <Input
               secureTextEntry={showPassword ? false : true}
               onChangeText={(val) =>
@@ -170,7 +188,7 @@ export default function LoginScreen(props: any) {
                 style={{
                   ...defaultStyles.danger,
                   ...defaultStyles.dangerItalic,
-                  ...styles.errorText,
+                  ...commonAuthStyles.errorText,
                 }}
               >
                 {validationErrors["password"].join(" and ")}
@@ -178,32 +196,41 @@ export default function LoginScreen(props: any) {
             )}
         </Form>
 
+        <CustomText
+          onPress={() => props.navigation.navigate("ForgotPassword")}
+          style={styles.forgotPassword}
+        >
+          Forgot Password
+        </CustomText>
+
         {/* ----- Form Submit Button ------ */}
         <TouchableOpacity
           onPress={onLoginFormSubmitListener}
           disabled={!checkFormValues()}
         >
-          <View style={{ ...styles.loginButtonContainer, ...checkDisabled() }}>
-            <Text style={styles.loginButtonText}>Login</Text>
+          <View
+            style={{
+              ...commonAuthStyles.registerButtonContainer,
+              ...checkDisabled(),
+            }}
+          >
+            <Text style={commonAuthStyles.registerButtonText}>Login</Text>
           </View>
         </TouchableOpacity>
 
-        {/* <Button
-          small
-          style={{ ...styles.loginButtonContainer, ...checkDisabled() }}
-          onPress={onLoginFormSubmitListener}
-          disabled={!checkFormValues()}
-        >
-          <CustomText style={styles.loginButtonText}>Login</CustomText>
-        </Button> */}
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <CustomText>
             Already have an account?{" "}
-            <Text style={defaultStyles.link}>Log in</Text>
+            <Text
+              style={defaultStyles.link}
+              onPress={() => props.navigation.navigate("Register")}
+            >
+              Sign up
+            </Text>
           </CustomText>
         </View>
         {showToast && (
-          <View style={styles.toast}>
+          <View style={commonAuthStyles.toast}>
             <Text>{toastMessage}</Text>
           </View>
         )}
@@ -213,31 +240,8 @@ export default function LoginScreen(props: any) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-  },
-  floatingLabel: {
-    fontFamily: "montserrat",
-  },
-  loginButtonContainer: {
-    maxWidth: "50%",
-    marginTop: 40,
-    paddingVertical: 10,
-    marginLeft: "25%",
-    borderRadius: 8,
-  },
-  loginButtonText: {
-    fontFamily: "montserrat-bold",
-    color: "white",
+  forgotPassword: {
     textAlign: "center",
-    fontSize: 17,
-  },
-  errorText: {
-    fontSize: 14,
-  },
-  toast: {
-    backgroundColor: "yellow",
-    marginTop: "30%",
-    padding: 10,
+    marginTop: 20,
   },
 });
