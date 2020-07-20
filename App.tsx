@@ -1,14 +1,37 @@
 import React, { useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-import ApolloClient from "apollo-client";
+import { ApolloClient, InMemoryCache, from } from "apollo-client-preset";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
+import { createHttpLink } from "apollo-link-http";
+import { setContext } from "apollo-link-context";
 
 import { AppNavigator } from "./navigation/AppNavigator";
-import { getUrl } from "./config";
 import AuthContextProvider from "./context/AuthContext";
+
+import { getUrl } from "./config";
+import { getItem } from "./helper_functions";
+
+const getToken = async () => {
+  const token = await getItem("cofficToken");
+  console.log("token", token);
+  return token;
+};
+
+const authMiddleware = setContext((operation) =>
+  getToken().then((token) => {
+    return {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-type": "text/plain",
+        authorization: `Bearer ${token}` || null,
+      },
+      fetchOptions: {
+        mode: "cors",
+      },
+    };
+  })
+);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -20,19 +43,12 @@ const fetchFonts = () => {
 };
 
 const cache = new InMemoryCache();
-const link = new HttpLink({
+const httpLink = createHttpLink({
   uri: `${getUrl()}/graphql`,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-type": "text/plain",
-  },
-  fetchOptions: {
-    mode: "cors",
-  },
 });
 
 const client = new ApolloClient({
-  link,
+  link: from([authMiddleware, httpLink]),
   cache,
 });
 

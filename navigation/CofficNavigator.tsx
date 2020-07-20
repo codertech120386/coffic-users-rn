@@ -36,7 +36,7 @@ const AuthNavigator = () => {
   return (
     <AuthStackNavigator.Navigator headerMode="screen">
       <AuthStackNavigator.Screen
-        name="Auth"
+        name="AuthScreen"
         component={AuthScreen}
         options={{ title: "Getting Started", headerTitleAlign: "center" }}
       />
@@ -131,7 +131,7 @@ const AccountNavigator = () => {
   return (
     <AccountStackNavigator.Navigator headerMode="screen">
       <AccountStackNavigator.Screen
-        name="Account"
+        name="MyAccount"
         component={AccountScreen}
         options={{ headerShown: false }}
       />

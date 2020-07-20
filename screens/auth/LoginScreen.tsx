@@ -71,8 +71,8 @@ export default function LoginScreen(props: any) {
         login({
           variables: { ...formValues, phone: newPhone },
         })
-          .then((result) => {
-            authContext.changeCofficToken(result.data.login.token);
+          .then(async (result) => {
+            await authContext.changeCofficToken(result.data.login.token);
 
             if (result.data.login.email_verified_at) {
               authContext.changeIsEmailVerified(true);

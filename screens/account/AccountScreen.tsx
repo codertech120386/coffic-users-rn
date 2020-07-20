@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Path } from "react-native-svg";
@@ -16,16 +16,17 @@ export default function AccountScreen(props: any) {
 
   const showProfileImage = () => {
     if (userPersonalDetails && userPersonalDetails.profile_image_url) {
-      return (
-        <img src={userPersonalDetails.profile_image_url} alt="profile"></img>
-      );
+      return <Image source={{ uri: userPersonalDetails.profile_image_url }} />;
     } else if (userPersonalDetails && userPersonalDetails.name) {
       const name = userPersonalDetails.name.split(" ").join("+");
       return (
-        <img
-          src={`https://ui-avatars.com/api/?background=eceff1&color=7a7a7a&name=${name}&rounded=true`}
-          alt="profile"
-        ></img>
+        <Image
+          source={{
+            uri: `https://ui-avatars.com/api/?background=eceff1&color=7a7a7a&name=${name}&rounded=true`,
+            height: 70,
+            width: 70,
+          }}
+        />
       );
     }
     return null;
@@ -37,13 +38,18 @@ export default function AccountScreen(props: any) {
   };
 
   const onUserProfileClicked = () => {
+    props.navigation.navigate("MyProfile", {
+      profileImageUrl:
+        userPersonalDetails && userPersonalDetails.profile_image_url,
+      name: userPersonalDetails && userPersonalDetails.name,
+    });
     // history.push({
     //   pathname: `/user-profile`,
     //   state: {
     //     data: {
-    //       profileImageUrl:
-    //         userPersonalDetails && userPersonalDetails.profile_image_url,
-    //       name: userPersonalDetails && userPersonalDetails.name,
+    // profileImageUrl:
+    //   userPersonalDetails && userPersonalDetails.profile_image_url,
+    // name: userPersonalDetails && userPersonalDetails.name,
     //     },
     //   },
     // });
@@ -51,13 +57,13 @@ export default function AccountScreen(props: any) {
 
   return (
     <View style={{ ...defaultStyles.container, ...styles.container }}>
-      <View>
+      <View style={styles.profileContainer}>
         {showProfileImage()}
-        <View>
-          <CustomText style={defaultStyles.h4Text}>
+        <View style={styles.cardTextContainer}>
+          <CustomText style={{ ...defaultStyles.h4Text, ...styles.text }}>
             {userPersonalDetails && userPersonalDetails.name}{" "}
           </CustomText>
-          <CustomText style={defaultStyles.h6Text}>
+          <CustomText style={{ ...defaultStyles.h6Text, ...styles.text }}>
             {userPersonalDetails && userPersonalDetails.email}{" "}
           </CustomText>
         </View>
@@ -65,7 +71,7 @@ export default function AccountScreen(props: any) {
           name="ios-arrow-forward"
           size={23}
           color="white"
-          onClick={onUserProfileClicked}
+          onPress={onUserProfileClicked}
         />
       </View>
       <View style={styles.cardContainer}>
@@ -196,9 +202,26 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     alignItems: "center",
   },
+  profileContainer: {
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  cardTextContainer: {
+    flex: 1,
+    marginLeft: 20,
+    justifyContent: "space-around",
+  },
+  text: {
+    fontFamily: "montserrat-bold",
+    color: "white",
+  },
   cardContainer: {
     width: "90%",
-    marginBottom: 20,
+    marginBottom: 10,
     paddingBottom: 15,
     borderBottomColor: "white",
     borderBottomWidth: 0.5,
