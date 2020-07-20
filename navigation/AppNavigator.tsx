@@ -1,12 +1,12 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { AuthNavigator } from "./CofficNavigator";
+import { FinalNavigator } from "./CofficNavigator";
 
-export const AppNavigator = () => {
+export const AppNavigator = (props: any) => {
   return (
     <NavigationContainer>
-      <AuthNavigator />
+      <FinalNavigator />
     </NavigationContainer>
   );
 };

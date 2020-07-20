@@ -46,6 +46,9 @@ const defaultStyles = StyleSheet.create({
   small: {
     fontSize: 13,
   },
+  extraSmall: {
+    fontSize: 11,
+  },
 });
 
 export default defaultStyles;

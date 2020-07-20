@@ -68,7 +68,6 @@ export default function LoginScreen(props: any) {
 
     if (isValid) {
       try {
-        console.log("form", { ...formValues, phone: newPhone });
         login({
           variables: { ...formValues, phone: newPhone },
         })
@@ -77,22 +76,12 @@ export default function LoginScreen(props: any) {
 
             if (result.data.login.email_verified_at) {
               authContext.changeIsEmailVerified(true);
-
-              console.log("here");
-            } else {
-              props.navigation.navigate("VerificationMailSent");
-              // history.push({
-              //   pathname: "/verification-mail-sent",
-              //   state: { data: { isLoggedIn: true } },
-              // });
             }
           })
           .catch((e) => {
-            console.log("catch 1", e);
             showToastBox("Please check your email and password and try again");
           });
       } catch (e) {
-        console.log("catch 2", e);
         showToastBox("Something went wrong .. Please try again later");
       }
     } else {
