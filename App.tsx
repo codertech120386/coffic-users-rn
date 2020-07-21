@@ -14,7 +14,6 @@ import { getItem } from "./helper_functions";
 
 const getToken = async () => {
   const token = await getItem("cofficToken");
-  console.log("token", token);
   return token;
 };
 

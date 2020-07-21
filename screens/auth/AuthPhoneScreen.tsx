@@ -18,7 +18,6 @@ export default function AuthPhoneScreen(props: any) {
     `${params && params.givenName} ${params && params.familyName}`
   );
 
-  console.log("email name", email, name);
   const [phone, setPhone] = useState<string>("");
   const [isPhoneError, setIsPhoneError] = useState<boolean>(false);
   const [phoneErrorText, setPhoneErrorText] = useState<string[]>([]);

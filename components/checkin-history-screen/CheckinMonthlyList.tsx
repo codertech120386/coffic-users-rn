@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
 
-import CheckinList from "../../components/checkin-history-screen/CheckinList";
-import CheckinCalendarMonthSection from "../../components/checkin-history-screen/CheckinCalendarMonthSection";
+import CheckinList from "./CheckinList";
+import CheckinCalendarMonthSection from "./CheckinCalendarMonthSection";
 
 import { GET_CHECKED_IN_HISTORY } from "../../queries";
 
@@ -14,13 +14,19 @@ let date: number = +startOfMonthMoment.format("DD");
 let month: number = +startOfMonthMoment.format("MM");
 let year: number = +startOfMonthMoment.format("YYYY");
 
-const CheckinMonthlyListScreen = (props: any) => {
-  const params = props && props.route && props.route.params;
+const CheckinMonthlyList = (props: any) => {
   const startDate =
-    (params && params.startDate) ||
+    (props &&
+      props.location &&
+      props.location.state &&
+      props.location.state.startDate) ||
     moment().startOf("month").format("YYYY-MM-DD");
   const endDate =
-    (params && params.endDate) || moment().endOf("month").format("YYYY-MM-DD");
+    (props &&
+      props.location &&
+      props.location.state &&
+      props.location.state.endDate) ||
+    moment().endOf("month").format("YYYY-MM-DD");
 
   const variables = {
     startDate,
@@ -36,7 +42,7 @@ const CheckinMonthlyListScreen = (props: any) => {
     variables: { ...variables, limit: 100, reverse: false },
   });
 
-  const onStartMonthChanged = (newDate: string) => {
+  const onStartMonthChanged = (newDate) => {
     const startDate = moment(newDate, "DD-MM-YYYY").format("YYYY-MM-DD");
     const endDate = moment(newDate, "DD-MM-YYYY")
       .endOf("month")
@@ -85,36 +91,27 @@ const CheckinMonthlyListScreen = (props: any) => {
   };
 
   const userCheckinHistory = historyData && historyData.userCheckinHistory;
-  console.log("userCheckinHistory", userCheckinHistory);
+
   return (
     <View style={styles.container}>
-      <View style={styles.checkInCalendar}>
-        <View style={{ height: 50 }}>
-          <CheckinCalendarMonthSection
-            goToPrevMonth={goToPrevMonth}
-            goToNextMonth={goToNextMonth}
-            monthName={monthName}
-            year={year}
-          />
-        </View>
-        <View style={{ height: "100%" }}>
-          <CheckinList
-            userCheckinHistory={userCheckinHistory}
-            showLimited={false}
-          />
-        </View>
-      </View>
+      <CheckinCalendarMonthSection
+        goToPrevMonth={goToPrevMonth}
+        goToNextMonth={goToNextMonth}
+        monthName={monthName}
+        year={year}
+      />
+      <div>
+        <CheckinList userCheckinHistory={userCheckinHistory} />
+      </div>
     </View>
   );
 };
-export default CheckinMonthlyListScreen;
+export default CheckinMonthlyList;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-  },
-  checkInCalendar: {
-    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

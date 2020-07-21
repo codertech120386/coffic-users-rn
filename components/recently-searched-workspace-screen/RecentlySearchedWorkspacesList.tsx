@@ -12,12 +12,9 @@ const RecentlySearchedWorkspacesList = (
     <View>
       {props &&
         props.workspaces &&
-        props.workspaces.map((workspace: any) => (
+        props.workspaces.map((workspace: any, i: number) => (
           <>
-            <WorkspaceListCard
-              workspace={workspace}
-              key={workspace.workspace.id}
-            />
+            <WorkspaceListCard workspace={workspace} key={i} />
             <View style={styles.horizontalDivider}></View>
           </>
         ))}

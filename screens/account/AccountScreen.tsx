@@ -33,7 +33,6 @@ export default function AccountScreen(props: any) {
   };
 
   const onRedirectToIconClicked = (redirectPath: string) => {
-    console.log("redicrect", redirectPath);
     props.navigation.navigate(redirectPath);
   };
 
@@ -214,6 +213,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 20,
     justifyContent: "space-around",
+    paddingRight: 20,
   },
   text: {
     fontFamily: "montserrat-bold",

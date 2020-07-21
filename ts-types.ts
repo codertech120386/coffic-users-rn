@@ -117,3 +117,22 @@ export interface IWorkspaceListCardProps {
 export interface ICheckinCardProps {
   data: any;
 }
+
+export interface ICheckinCalendarProps {
+  dateData: any;
+  onDateChange: any;
+  onStartMonthChanged: any;
+}
+
+export interface ICheckinCalendarMonthSectionProps {
+  goToPrevMonth: any;
+  goToNextMonth: any;
+  monthName: string;
+  year: number;
+}
+
+export interface ICheckinListProps {
+  userCheckinHistory: any;
+  onViewAllClicked?: any;
+  showLimited?: boolean;
+}

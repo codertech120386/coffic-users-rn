@@ -1,12 +1,11 @@
 const validations = {
-  required: (value, field, args) => {
+  required: (value: any, field: any, args: any) => {
     if (value.trim().length > 0) {
       return [true, null];
     }
     return [false, `${field} is required`];
   },
   matchLength: (value: string, field: string, args: any[]) => {
-    console.log("Args", args);
     const length = args[1];
     const unit = args[2];
     if (value.trim().length == length) {
