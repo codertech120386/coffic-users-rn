@@ -136,3 +136,12 @@ export interface ICheckinListProps {
   onViewAllClicked?: any;
   showLimited?: boolean;
 }
+export interface IPurchasesListProps {
+  purchases: any;
+  redirectToPurchaseDetail: any;
+}
+
+export interface IPurchaseCardProps {
+  purchase: any;
+  redirectToPurchaseDetail: any;
+}

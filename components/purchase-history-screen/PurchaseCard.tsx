@@ -1,24 +1,27 @@
 import React from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 
-import { ICheckinCardProps } from "../../ts-types";
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { IPurchaseCardProps } from "../../ts-types";
+
 import { CustomText } from "../ui/CustomText";
 import defaultStyles, { Colors } from "../../AppCss";
-import { Ionicons } from "@expo/vector-icons";
 
-const CheckinCard = (props: ICheckinCardProps) => {
-  const createdAtTime = moment(
-    props && props.data && props.data.created_at
-  ).format("LT");
-
-  const createdAtDate = moment(
-    props && props.data && props.data.created_at
+const PurchaseCard = (props: IPurchaseCardProps) => {
+  const purchase = props && props.purchase;
+  const plan = purchase && purchase.plan;
+  const workspace = plan && plan.workspace;
+  const workspaceName = workspace && workspace.name;
+  const firstImage =
+    workspace &&
+    workspace.images &&
+    workspace.images[0] &&
+    workspace.images[0].image_url;
+  const purchasedAt = moment(
+    purchase && purchase.created_at,
+    "YYYY-MM-DD"
   ).format("DD MMMM YYYY");
-
-  const workspace = props && props.data && props.data.workspace;
-  const workspaceImage =
-    workspace && workspace.images && workspace.images[0].image_url;
 
   return (
     <View style={{ ...defaultStyles.container, ...styles.container }}>
@@ -30,14 +33,14 @@ const CheckinCard = (props: ICheckinCardProps) => {
             ...styles.daysText,
           }}
         >
-          {createdAtDate}
+          {purchasedAt}
         </CustomText>
       </View>
       <View style={styles.cardContainer}>
         <View>
           <Image
             style={styles.workspaceImage}
-            source={{ uri: workspaceImage, width: 60, height: 60 }}
+            source={{ uri: firstImage, width: 60, height: 60 }}
           />
         </View>
         <View style={styles.cardTextContainer}>
@@ -48,18 +51,25 @@ const CheckinCard = (props: ICheckinCardProps) => {
               fontFamily: "montserrat-bold",
             }}
           >
-            Checked in at {workspace && workspace.name}
+            {plan && plan.space_type} at {workspaceName}
           </CustomText>
           <CustomText style={{ ...defaultStyles.extraSmall, ...styles.text }}>
-            {createdAtTime}
+            {plan && plan.title} Plan
           </CustomText>
         </View>
+        <TouchableOpacity
+          style={styles.forwardIconContainer}
+          onPress={() =>
+            props.redirectToPurchaseDetail(purchase && purchase.id)
+          }
+        >
+          <Ionicons name="ios-arrow-forward" size={23} color={Colors.primary} />
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-export default CheckinCard;
+export default PurchaseCard;
 
 const styles = StyleSheet.create({
   container: {

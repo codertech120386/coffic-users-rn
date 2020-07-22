@@ -8,7 +8,6 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { commonAuthStyles } from "../../styles/CommonAuthStyles";
 
 const CheckinList = (props: ICheckinListProps) => {
-  console.log("props.userCheckinHistory", props.userCheckinHistory);
   return (
     <ScrollView style={styles.container}>
       {props.userCheckinHistory &&

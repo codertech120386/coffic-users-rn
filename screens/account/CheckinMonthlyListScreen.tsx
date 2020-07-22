@@ -85,7 +85,6 @@ const CheckinMonthlyListScreen = (props: any) => {
   };
 
   const userCheckinHistory = historyData && historyData.userCheckinHistory;
-  console.log("userCheckinHistory", userCheckinHistory);
   return (
     <View style={styles.container}>
       <View style={styles.checkInCalendar}>
