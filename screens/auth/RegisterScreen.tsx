@@ -11,6 +11,7 @@ import {
   Text,
   Icon,
 } from "native-base";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { CustomText } from "../../components/ui/CustomText";
 import { SIGNUP } from "../../mutations";
@@ -18,8 +19,6 @@ import { SIGNUP } from "../../mutations";
 import { validateInputs } from "../../helper_functions";
 
 import defaultStyles, { Colors } from "../../AppCss";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { commonAuthStyles } from "../../styles/CommonAuthStyles";
 
 export default function RegisterScreen(props: any) {

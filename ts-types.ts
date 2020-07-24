@@ -145,3 +145,7 @@ export interface IPurchaseCardProps {
   purchase: any;
   redirectToPurchaseDetail: any;
 }
+
+export interface IFAQCardProps {
+  faq: any;
+}
