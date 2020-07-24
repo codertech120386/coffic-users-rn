@@ -8,6 +8,7 @@ import { setContext } from "apollo-link-context";
 
 import { AppNavigator } from "./navigation/AppNavigator";
 import AuthContextProvider from "./context/AuthContext";
+import CouponContextProvider from "./context/CouponContext";
 
 import { getUrl } from "./config";
 import { getItem } from "./helper_functions";
@@ -67,9 +68,11 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-      <ApolloProvider client={client}>
-        <AppNavigator />
-      </ApolloProvider>
+      <CouponContextProvider>
+        <ApolloProvider client={client}>
+          <AppNavigator />
+        </ApolloProvider>
+      </CouponContextProvider>
     </AuthContextProvider>
   );
 }

@@ -149,3 +149,11 @@ export interface IPurchaseCardProps {
 export interface IFAQCardProps {
   faq: any;
 }
+
+export interface ICouponCodeCardProps {
+  couponCode: any;
+}
+
+export interface ICouponCodesListProps {
+  couponCodes: any;
+}
