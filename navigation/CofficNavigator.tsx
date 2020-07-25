@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 import AuthScreen from "../screens/auth/AuthScreen";
 import AuthPhoneScreen from "../screens/auth/AuthPhoneScreen";
@@ -30,6 +29,8 @@ import FaqScreen from "../screens/account/FaqScreen";
 import CouponCodesScreen from "../screens/account/CouponCodesScreen";
 import SignoutScreen from "../screens/account/SignOutScreen";
 import MySpacesSubscriptionDetails from "../screens/MySpacesSubscriptionDetailsScreen";
+import defaultStyles, { Colors } from "../AppCss";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 // ----------- Auth Stack Navigator ----------------
 const AuthStackNavigator = createStackNavigator();
@@ -199,11 +200,58 @@ const AccountNavigator = () => {
 const BottomTabNavigator = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
-    <BottomTabNavigator.Navigator>
+    <BottomTabNavigator.Navigator
+      tabBarOptions={{
+        activeTintColor: Colors.primary,
+        inactiveTintColor: "#ccc",
+        safeAreaInsets: { bottom: 10 },
+        labelStyle: {
+          ...defaultStyles.small,
+          fontFamily: "montserrat-semi-bold",
+        },
+      }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => {
+          let finalComponent;
+
+          if (route.name === "Home") {
+            finalComponent = focused ? (
+              <MaterialIcons name="explore" size={24} color={Colors.primary} />
+            ) : (
+              <MaterialIcons name="explore" size={24} color="#ccc" />
+            );
+          } else if (route.name === "MySpaces") {
+            finalComponent = focused ? (
+              <MaterialIcons name="person" size={24} color={Colors.primary} />
+            ) : (
+              <MaterialIcons name="person" size={24} color="#ccc" />
+            );
+          } else if (route.name === "Account") {
+            finalComponent = focused ? (
+              <MaterialCommunityIcons
+                name="dots-horizontal"
+                size={24}
+                color={Colors.primary}
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="dots-horizontal"
+                size={24}
+                ccolor="#ccc"
+              />
+            );
+          }
+
+          // You can return any component that you like here!
+          return finalComponent;
+        },
+      })}
+    >
       <BottomTabNavigator.Screen name="Home" component={HomeNavigator} />
       <BottomTabNavigator.Screen
         name="MySpaces"
         component={MySpacesNavigator}
+        options={{ tabBarLabel: "My Spaces" }}
       />
       <BottomTabNavigator.Screen name="Account" component={AccountNavigator} />
     </BottomTabNavigator.Navigator>
