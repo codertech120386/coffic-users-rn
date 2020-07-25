@@ -28,9 +28,6 @@ const CouponCodeCard = (props: ICouponCodeCardProps) => {
   const couponCode = props && props.couponCode;
 
   const onCopyCouponCodeClicked = (code: string) => {
-    console.log("Clip", Clipboard);
-    console.log("code", code);
-    debugger;
     Clipboard.setString("hello");
     setIsTextCopied(true);
   };

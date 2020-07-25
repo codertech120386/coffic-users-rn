@@ -39,11 +39,11 @@ const defaultStyles = StyleSheet.create({
     fontSize: 17,
   },
   h5Text: {
-    fontFamily: "montserrat-bold",
+    fontFamily: "montserrat-semi-bold",
     fontSize: 16,
   },
   h6Text: {
-    fontFamily: "montserrat-bold",
+    fontFamily: "montserrat-semi-bold",
     fontSize: 15,
   },
   small: {

@@ -157,3 +157,9 @@ export interface ICouponCodeCardProps {
 export interface ICouponCodesListProps {
   couponCodes: any;
 }
+
+export interface ShowSubscriptionsProps {
+  activeSubscriptions: any;
+  expiredSubscriptions: any;
+  subscriptonCardButtonClicked: any;
+}

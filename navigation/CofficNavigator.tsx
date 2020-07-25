@@ -29,6 +29,7 @@ import SupportScreen from "../screens/account/SupportScreen";
 import FaqScreen from "../screens/account/FaqScreen";
 import CouponCodesScreen from "../screens/account/CouponCodesScreen";
 import SignoutScreen from "../screens/account/SignOutScreen";
+import MySpacesSubscriptionDetails from "../screens/MySpacesSubscriptionDetailsScreen";
 
 // ----------- Auth Stack Navigator ----------------
 const AuthStackNavigator = createStackNavigator();
@@ -120,6 +121,11 @@ const MySpacesNavigator = () => {
         name="MySpaces"
         component={MySpacesScreen}
         options={{ title: "My Spaces" }}
+      />
+      <MySpacesStackNavigator.Screen
+        name="MySpacesSubscriptionDetail"
+        component={MySpacesSubscriptionDetails}
+        options={{ title: "Subscription Details" }}
       />
     </MySpacesStackNavigator.Navigator>
   );
