@@ -214,7 +214,7 @@ const SubscriptionCard = ({
                 {statusText}
               </CustomText>
 
-              {/* ----- Purchase Again Button ------ */}
+              {/* ----- Subscription Action Button ------ */}
               <View>
                 <TouchableOpacity
                   style={{

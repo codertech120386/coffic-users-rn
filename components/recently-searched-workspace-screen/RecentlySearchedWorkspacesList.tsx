@@ -13,10 +13,13 @@ const RecentlySearchedWorkspacesList = (
       {props &&
         props.workspaces &&
         props.workspaces.map((workspace: any, i: number) => (
-          <>
-            <WorkspaceListCard workspace={workspace} key={i} />
+          <View key={i}>
+            <WorkspaceListCard
+              workspace={workspace}
+              onRedirectToIconClicked={props.onRedirectToIconClicked}
+            />
             <View style={styles.horizontalDivider}></View>
-          </>
+          </View>
         ))}
     </View>
   </ScrollView>

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { FONTSTYLES } from "./constants";
 
 export const Colors = {
   primary: "#61C6BB",
@@ -25,37 +26,37 @@ const defaultStyles = StyleSheet.create({
     color: "white",
   },
   dangerItalic: {
-    fontFamily: "montserrat-italic",
+    fontFamily: FONTSTYLES.italic,
   },
   h2Text: {
     fontSize: 20,
   },
   h3Text: {
-    fontFamily: "montserrat-bold",
+    fontFamily: FONTSTYLES.bold,
     fontSize: 18,
   },
   h4Text: {
-    fontFamily: "montserrat-bold",
+    fontFamily: FONTSTYLES.bold,
     fontSize: 17,
   },
   h5Text: {
-    fontFamily: "montserrat-semi-bold",
+    fontFamily: FONTSTYLES.semiBold,
     fontSize: 16,
   },
   h6Text: {
-    fontFamily: "montserrat-semi-bold",
+    fontFamily: FONTSTYLES.semiBold,
     fontSize: 15,
   },
   small: {
-    fontFamily: "montserrat",
+    fontFamily: FONTSTYLES.normal,
     fontSize: 13,
   },
   littleSmall: {
-    fontFamily: "montserrat",
+    fontFamily: FONTSTYLES.normal,
     fontSize: 12,
   },
   extraSmall: {
-    fontFamily: "montserrat",
+    fontFamily: FONTSTYLES.normal,
     fontSize: 11,
   },
 });

@@ -10,6 +10,12 @@ import { RECENTLY_SEARCH_WORKSPACES } from "../../queries";
 const RecentSearchesScreen = (props: any) => {
   const { loading, error, data } = useQuery(RECENTLY_SEARCH_WORKSPACES);
 
+  const redirectToWorkspaceDetails = (id: number) => {
+    props.navigation.navigate("WorkspaceDetails", {
+      id,
+    });
+  };
+
   return (
     <View style={styles.container}>
       {data &&
@@ -17,6 +23,7 @@ const RecentSearchesScreen = (props: any) => {
       data.recentlySearchedWorkspaces.length ? (
         <RecentlySearchedWorkspacesList
           workspaces={data && data.recentlySearchedWorkspaces}
+          onRedirectToIconClicked={redirectToWorkspaceDetails}
         />
       ) : (
         <NoRecentlySearchedWorkspaces />

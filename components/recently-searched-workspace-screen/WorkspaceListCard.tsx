@@ -7,7 +7,7 @@ import { CustomText } from "../ui/CustomText";
 import { Ionicons } from "@expo/vector-icons";
 import defaultStyles, { Colors } from "../../AppCss";
 
-const WorkspaceListCard = (props: any) => {
+const WorkspaceListCard = (props: IWorkspaceListCardProps) => {
   const workspace = props && props.workspace;
   const updatedAtDate = moment(workspace && workspace.updated_at);
   const today = moment();
@@ -52,7 +52,9 @@ const WorkspaceListCard = (props: any) => {
         <TouchableOpacity
           style={styles.forwardIconContainer}
           onPress={() => {
-            props.onRedirectToIconClicked(props.redirectPath);
+            props.onRedirectToIconClicked(
+              workspace && workspace.workspace && workspace.workspace.id
+            );
           }}
         >
           <Ionicons name="ios-arrow-forward" size={23} color={Colors.primary} />

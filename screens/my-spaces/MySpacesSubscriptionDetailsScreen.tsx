@@ -3,9 +3,9 @@ import { View, Image, StyleSheet } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
 
-import { GET_SUBSCRIPTION } from "../queries";
-import { CustomText } from "../components/ui/CustomText";
-import defaultStyles, { Colors } from "../AppCss";
+import { GET_SUBSCRIPTION } from "../../queries";
+import { CustomText } from "../../components/ui/CustomText";
+import defaultStyles, { Colors } from "../../AppCss";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 

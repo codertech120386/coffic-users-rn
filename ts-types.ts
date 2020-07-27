@@ -98,6 +98,8 @@ export interface IWorkspaceSpaceTypePlanProps {
   spaceType: string;
   availedFreePlanIds: number[];
   workspace: IWorkspace;
+  onBackClickListener?: any;
+  onPurchaseClickListener: any;
 }
 
 export interface IUserProfessionalDetailsProps {
@@ -108,10 +110,12 @@ export interface IUserProfessionalDetailsProps {
 
 export interface IRecentlySearchedWorkspacesListProps {
   workspaces: any;
+  onRedirectToIconClicked: any;
 }
 
 export interface IWorkspaceListCardProps {
   workspace: any;
+  onRedirectToIconClicked: any;
 }
 
 export interface ICheckinCardProps {
@@ -162,4 +166,27 @@ export interface ShowSubscriptionsProps {
   activeSubscriptions: any;
   expiredSubscriptions: any;
   subscriptonCardButtonClicked: any;
+}
+
+export interface IWorkspaceWeeklyScheduleProps {
+  workspaceId: number;
+}
+
+export interface IWorkspaceScheduleProps {
+  workspaceId: number;
+}
+
+export interface IWorkspaceDetailsAddress {
+  address: string;
+}
+
+export interface IWorkspaceNumberOfSeatsProps {
+  numberOfSeats: number;
+  removeSeat: any;
+  addSeat: any;
+}
+
+export interface ICalendarProps {
+  onDateChange: any;
+  plan: any;
 }

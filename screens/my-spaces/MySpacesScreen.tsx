@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 
-import { RECENTLY_SEARCH_WORKSPACES, USER_SUBSCRIPTIONS } from "../queries";
-import ShowSubscriptions from "../components/my-spaces-screen/ShowSubscriptions";
-import NoSubscriptionsFoundExplore from "../components/my-spaces-screen/NoSubscriptionsFoundExplore";
-import defaultStyles from "../AppCss";
+import { RECENTLY_SEARCH_WORKSPACES, USER_SUBSCRIPTIONS } from "../../queries";
+import ShowSubscriptions from "../../components/my-spaces-screen/ShowSubscriptions";
+import NoSubscriptionsFoundExplore from "../../components/my-spaces-screen/NoSubscriptionsFoundExplore";
+import defaultStyles from "../../AppCss";
 
 export default function MySpacesScreen(props: any) {
   const {

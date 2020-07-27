@@ -13,9 +13,9 @@ import VerifyMailScreen from "../screens/auth/VerifyMailScreen";
 import ChangePasswordScreen from "../screens/auth/ChangePasswordScreen";
 import TermsAndConditionsScreen from "../screens/TermsAndConditionsScreen";
 import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
-import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "../screens/home/HomeScreen";
 import AccountScreen from "../screens/account/AccountScreen";
-import MySpacesScreen from "../screens/MySpacesScreen";
+import MySpacesScreen from "../screens/my-spaces/MySpacesScreen";
 
 import { AuthContext } from "../context/AuthContext";
 import MyProfileScreen from "../screens/account/MyProfileScreen";
@@ -28,9 +28,13 @@ import SupportScreen from "../screens/account/SupportScreen";
 import FaqScreen from "../screens/account/FaqScreen";
 import CouponCodesScreen from "../screens/account/CouponCodesScreen";
 import SignoutScreen from "../screens/account/SignOutScreen";
-import MySpacesSubscriptionDetails from "../screens/MySpacesSubscriptionDetailsScreen";
+import MySpacesSubscriptionDetails from "../screens/my-spaces/MySpacesSubscriptionDetailsScreen";
 import defaultStyles, { Colors } from "../AppCss";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import WorkspaceDetailsScreen from "../screens/home/WorkspaceDetailsScreen";
+import CheckinSuccessScreen from "../screens/home/CheckinSuccessScreen";
+import WorkspaceAmenitiesScreen from "../screens/home/WorkspaceAmenitiesScreen";
+import OrderSummaryScreen from "../screens/home/OrderSummaryScreen";
 
 // ----------- Auth Stack Navigator ----------------
 const AuthStackNavigator = createStackNavigator();
@@ -108,6 +112,26 @@ const HomeNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{ headerShown: false }}
+      />
+      <HomeStackNavigator.Screen
+        name="WorkspaceDetails"
+        component={WorkspaceDetailsScreen}
+        options={{ title: "Workspace Details" }}
+      />
+      <HomeStackNavigator.Screen
+        name="CheckinSuccess"
+        component={CheckinSuccessScreen}
+        options={{ title: "Checkin Success" }}
+      />
+      <HomeStackNavigator.Screen
+        name="WorkspaceAmenities"
+        component={WorkspaceAmenitiesScreen}
+        options={{ title: "Workspace Amenities" }}
+      />
+      <HomeStackNavigator.Screen
+        name="OrderSummary"
+        component={OrderSummaryScreen}
+        options={{ title: "Order Summary" }}
       />
     </HomeStackNavigator.Navigator>
   );

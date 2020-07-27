@@ -73,3 +73,12 @@ export const password =
   Math.random().toString(36).substring(2, 15);
 
 export const GENDERS = ["male", "female", "others"];
+
+export const FONTSTYLES = {
+  normal: "montserrat",
+  semiBold: "montserrat-semi-bold",
+  bold: "montserrat-bold",
+  italic: "montserrat-italic",
+  semiBoldItalic: "montserrat-semi-bold-italic",
+  boldItalic: "montserrat-bold-italic",
+};
