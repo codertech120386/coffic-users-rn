@@ -35,6 +35,7 @@ import WorkspaceDetailsScreen from "../screens/home/WorkspaceDetailsScreen";
 import CheckinSuccessScreen from "../screens/home/CheckinSuccessScreen";
 import WorkspaceAmenitiesScreen from "../screens/home/WorkspaceAmenitiesScreen";
 import OrderSummaryScreen from "../screens/home/OrderSummaryScreen";
+import WorkspaceSubscriptionPurchasedScreen from "../screens/home/WorkspaceSubscriptionPurchasedScreen";
 
 // ----------- Auth Stack Navigator ----------------
 const AuthStackNavigator = createStackNavigator();
@@ -132,6 +133,11 @@ const HomeNavigator = () => {
         name="OrderSummary"
         component={OrderSummaryScreen}
         options={{ title: "Order Summary" }}
+      />
+      <HomeStackNavigator.Screen
+        name="WorkspaceSubscriptionPurchased"
+        component={WorkspaceSubscriptionPurchasedScreen}
+        options={{ headerShown: false }}
       />
     </HomeStackNavigator.Navigator>
   );

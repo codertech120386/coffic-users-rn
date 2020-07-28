@@ -20,6 +20,7 @@ const SubscriptionCardList = ({
           showBottomOptions={true}
           checkinFailed={checkInFailed}
           subscriptonCardButtonClicked={subscriptonCardButtonClicked}
+          styleProps={{ backgroundColor: "white" }}
         />
       ))}
     </ScrollView>

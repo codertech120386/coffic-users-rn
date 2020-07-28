@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const CREATE_ORDER = gql`
   mutation createOrder(
@@ -10,6 +10,36 @@ export const CREATE_ORDER = gql`
     $endDate: String
   ) {
     createOrder(
+      planId: $planId
+      numberOfSeats: $numberOfSeats
+      gateway: $gateway
+      couponCode: $couponCode
+      startDate: $startDate
+      endDate: $endDate
+    ) {
+      order_id
+      amount
+      subscription_id
+      user {
+        id
+        name
+        email
+        phone
+      }
+    }
+  }
+`;
+
+export const CREATE_ORDER_v1 = gql`
+  mutation createOrderV1(
+    $planId: Int!
+    $numberOfSeats: Int!
+    $gateway: String!
+    $couponCode: String
+    $startDate: String
+    $endDate: String
+  ) {
+    createOrderV1(
       planId: $planId
       numberOfSeats: $numberOfSeats
       gateway: $gateway

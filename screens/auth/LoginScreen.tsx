@@ -53,11 +53,6 @@ export default function LoginScreen(props: any) {
   };
 
   const onLoginFormSubmitListener = () => {
-    const newPhone =
-      formValues && formValues.phone && formValues.phone.length === 10
-        ? `91${formValues.phone}`
-        : formValues.phone;
-    setFormValues({ ...formValues, phone: newPhone });
     const [isValid, errors] = validateInputs(
       {
         email: ["required", "email"],
@@ -69,7 +64,7 @@ export default function LoginScreen(props: any) {
     if (isValid) {
       try {
         login({
-          variables: { ...formValues, phone: newPhone },
+          variables: { ...formValues },
         })
           .then(async (result) => {
             await authContext.changeCofficToken(result.data.login.token);
@@ -79,6 +74,7 @@ export default function LoginScreen(props: any) {
             }
           })
           .catch((e) => {
+            console.log("e", e);
             showToastBox("Please check your email and password and try again");
           });
       } catch (e) {

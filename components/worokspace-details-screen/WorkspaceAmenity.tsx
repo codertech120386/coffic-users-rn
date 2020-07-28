@@ -8,7 +8,6 @@ import defaultStyles from "../../AppCss";
 
 const WorkspaceAmenity = (props: IWorkspaceAmenityProps) => {
   const amenity = props.amenity;
-  console.log("amenity", amenity);
   return (
     <View style={styles.container}>
       <Image

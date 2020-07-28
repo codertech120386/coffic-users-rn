@@ -190,3 +190,8 @@ export interface ICalendarProps {
   onDateChange: any;
   plan: any;
 }
+
+export interface ICouponCodeProps {
+  applyCode: any;
+  removeCode: any;
+}

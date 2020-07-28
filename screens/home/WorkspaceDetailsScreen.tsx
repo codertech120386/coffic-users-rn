@@ -150,7 +150,6 @@ const WorkspaceDetailsScreen = (props: any) => {
 
   const onPurchaseClickListener = (data: any) => {
     props.navigation.navigate("OrderSummary", data);
-    console.log("data", data);
   };
 
   let amenitiesIterationCounter = 1;
@@ -171,7 +170,13 @@ const WorkspaceDetailsScreen = (props: any) => {
       {fetchedWorkspace ? (
         <ScrollView style={styles.container}>
           <Image source={{ uri: imageUrl }} style={styles.workspaceImage} />
-          <View style={{ width: "95%", alignItems: "center" }}>
+          <View
+            style={{
+              width: "92%",
+              alignItems: "center",
+              marginLeft: "4%",
+            }}
+          >
             <View
               style={{
                 width: "94%",

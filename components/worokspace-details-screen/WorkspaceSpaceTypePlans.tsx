@@ -306,7 +306,7 @@ const WorkspaceSpaceTypePlans = (props: IWorkspaceSpaceTypePlanProps) => {
               backgroundColor: "#CDFADD",
               marginTop: -5,
               marginBottom: 25,
-              marginLeft: 15,
+              marginLeft: 5,
               borderColor: Colors.primary,
               borderWidth: 1,
               borderRadius: 10,

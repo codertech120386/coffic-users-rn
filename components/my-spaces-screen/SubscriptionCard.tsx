@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Image,
@@ -18,8 +18,16 @@ const SubscriptionCard = ({
   showBottomOptions,
   checkinFailed,
   subscriptonCardButtonClicked,
+  showBottomBorder,
+  styleProps,
 }: any) => {
   const [checkin, {}] = useMutation(CHECKIN);
+
+  const [isShowBottomBorder, setIsShowBottomBorder] = useState<boolean>(
+    showBottomBorder !== undefined || showBottomBorder !== null
+      ? showBottomBorder
+      : true
+  );
 
   const payment = subscription && subscription.payment;
   const plan = payment && payment.plan;
@@ -139,7 +147,7 @@ const SubscriptionCard = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.planContainer}>
+      <View style={{ ...styles.planContainer, ...styleProps }}>
         <View style={styles.cardContainer}>
           <View style={{ alignSelf: "center" }}>
             <Image
@@ -169,15 +177,16 @@ const SubscriptionCard = ({
             </CustomText>
           </View>
         </View>
-        <View style={styles.cardBottomBorder} />
+        {isShowBottomBorder && <View style={styles.cardBottomBorder} />}
         <View
           style={{
             marginVertical: 10,
             borderTopColor: "#ccc",
             borderTopWidth: 1,
-            paddingVertical: 15,
+            paddingTop: 15,
+            paddingBottom: isShowBottomBorder ? 15 : 5,
             borderBottomColor: "#ccc",
-            borderBottomWidth: 1,
+            borderBottomWidth: isShowBottomBorder ? 1 : 0,
           }}
         >
           {purchaseDetailsRow("Package", plan && plan.location_type)}
