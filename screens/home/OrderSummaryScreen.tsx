@@ -192,7 +192,7 @@ const OrderSummaryScreen = (props: any) => {
               paymentDetails.orderId
             }&TXN_AMOUNT=${paymentDetails.amount}&PLAN_ID=${
               paymentDetails.planId
-            }`,
+            }&SUBS_ID=${paymentDetails.subscriptionId}`,
           }}
           injectedJavaScript={`document.getElementById('ORDER_ID').value = "${paymentDetails.orderId}"; document.getElementById('TXN_AMOUNT').value = "${paymentDetails.amount}";document.f1.submit()`}
           onNavigationStateChange={(data: any) => {
