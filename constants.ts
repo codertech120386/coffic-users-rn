@@ -72,7 +72,11 @@ export const password =
   Math.random().toString(36).substring(2, 15) +
   Math.random().toString(36).substring(2, 15);
 
-export const GENDERS = ["male", "female", "others"];
+export const GENDERS = [
+  { id: 1, type: "male" },
+  { id: 2, type: "female" },
+  { id: 3, type: "others" },
+];
 
 export const FONTSTYLES = {
   normal: "montserrat",

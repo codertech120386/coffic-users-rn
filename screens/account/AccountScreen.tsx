@@ -5,9 +5,11 @@ import { Ionicons } from "@expo/vector-icons";
 import Svg, { Path } from "react-native-svg";
 
 import { USER_PERSONAL_DETAILS_MINI } from "../../queries";
-import defaultStyles, { Colors } from "../../AppCss";
+
 import { AccountPageCard } from "../../components/account-screen/AccountPageCard";
 import { CustomText } from "../../components/ui/CustomText";
+
+import defaultStyles, { Colors } from "../../AppCss";
 
 export default function AccountScreen(props: any) {
   const { loading, error, data } = useQuery(USER_PERSONAL_DETAILS_MINI);

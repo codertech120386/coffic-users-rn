@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../AppCss";
+import defaultStyles, { Colors } from "../AppCss";
 
 export const commonAuthStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
   },
   floatingLabel: {
-    fontFamily: "montserrat",
+    ...defaultStyles.littleSmall,
+    fontFamily: "montserrat-semi-bold",
+    marginBottom: 5,
   },
   registerButtonContainer: {
     maxWidth: "50%",
