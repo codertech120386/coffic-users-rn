@@ -15,6 +15,8 @@ const AuthScreen = (props: any) => {
           "288660621120-iu1r6dfllqummha4iio3nouiq539n37f.apps.googleusercontent.com",
         iosClientId:
           "288660621120-oojvna4l1nvrfhgeoura7cejel7cia5u.apps.googleusercontent.com",
+        iosStandaloneAppClientId:
+          "83725301118-omlsjuf2ukiqi116opsst3dbt1i2omnl.apps.googleusercontent.com",
         scopes: ["profile", "email"],
       });
 

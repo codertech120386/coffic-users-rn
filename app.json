@@ -2,7 +2,7 @@
   "expo": {
     "name": "coffic-users-react-native",
     "slug": "coffic-users-react-native",
-    "version": "1.0.0",
+    "version": "4.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -13,11 +13,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.cofficapp",
+      "buildNumber": "4.0.0",
+      "supportsTablet": true,
+      "ios.config.googleSignIn.reservedClientId": "com.googleusercontent.apps.83725301118-omlsjuf2ukiqi116opsst3dbt1i2omnl"
     },
     "web": {
       "favicon": "./assets/favicon.png"
