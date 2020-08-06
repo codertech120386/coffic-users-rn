@@ -54,6 +54,7 @@ export interface IWorkspace extends IIdWithDate {
   short_address: string;
   opens_at: string;
   closes_at: string;
+  image_urls?: string[];
 }
 
 export interface CheckboxType {
@@ -86,10 +87,6 @@ export interface IWorkspaceBannerProps {
 
 export interface IWorkspaceAmenityProps {
   amenity: IAmenity;
-}
-
-export interface IWorkspaceProps {
-  workspace: IWorkspace;
 }
 
 export interface IWorkspaceSpaceTypePlanProps {
@@ -194,4 +191,46 @@ export interface ICalendarProps {
 export interface ICouponCodeProps {
   applyCode: any;
   removeCode: any;
+}
+
+export interface IWorkspaceTypeProps {
+  type: {
+    id: number;
+    name: string;
+    displayName?: string;
+  };
+  filters?: any;
+  searchTerm?: string | null;
+  latLong: string | null;
+  onNoResultsExploreButtonClicked: any;
+  showDetailsClicked: any;
+}
+
+export interface IWorkspaceProps {
+  type?: any;
+  workspaces: IWorkspace[];
+  showDetailsClicked: any;
+}
+
+export interface IWorkspaceCard {
+  workspace: IWorkspace;
+  currentWorkspaceId?: number;
+  single: boolean;
+  alone: boolean;
+  showDetailsClicked: any;
+}
+
+export interface ICheckboxProps {
+  isChecked: boolean;
+  text: string;
+  type: string;
+  value: string;
+  checkboxChangedListener: any;
+}
+
+export interface ImageSliderProps {
+  workspace: any;
+  styleProps: any;
+  location?: string;
+  currentWorkspaceId?: number;
 }

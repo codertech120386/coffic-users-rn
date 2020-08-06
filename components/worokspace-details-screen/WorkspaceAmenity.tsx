@@ -13,9 +13,8 @@ const WorkspaceAmenity = (props: IWorkspaceAmenityProps) => {
       <Image
         source={{ uri: amenity.icon_url }}
         style={{
-          width: 30,
-          height: 30,
-          backgroundColor: "red",
+          width: 10,
+          height: 10,
           color: "black",
         }}
       />

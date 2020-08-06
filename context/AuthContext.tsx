@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 
 import { setItem, getItem, removeItem } from "../helper_functions";
 
-interface AuthContextProps {
+interface IAuthContextProps {
   isLoggedIn: boolean | null;
   cofficToken: string | null;
   isEmailVerified: boolean | null;
@@ -20,7 +20,7 @@ export const AuthContext = createContext({
   changeCofficToken: (token: string) => {},
   removeCofficToken: () => {},
   changeIsEmailVerified: (value: boolean) => {},
-} as AuthContextProps);
+} as IAuthContextProps);
 
 const AuthContextProvider = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);

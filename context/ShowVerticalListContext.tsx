@@ -1,21 +1,28 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
+
+interface IShowVerticalListContextProps {
+  showVerticalList: boolean;
+  verticalType: any;
+  changeShowVerticalList: (state: any) => void;
+  changeType: (type: any) => void;
+}
 
 export const ShowVerticalListContext = createContext({
   showVerticalList: false,
   verticalType: null,
   changeShowVerticalList: () => {},
   changeType: () => {},
-});
+} as IShowVerticalListContextProps);
 
-const ShowVerticalListContextProvider = (props) => {
-  const [showVerticalList, setShowVerticalList] = useState(false);
-  const [verticalType, setVerticalType] = useState(null);
+const ShowVerticalListContextProvider = (props: any) => {
+  const [showVerticalList, setShowVerticalList] = useState<boolean>(false);
+  const [verticalType, setVerticalType] = useState<any>(null);
 
-  const changeShowVerticalList = (state) => {
+  const changeShowVerticalList = (state: any) => {
     setShowVerticalList(state);
   };
 
-  const changeType = (type) => {
+  const changeType = (type: any) => {
     const newType = { ...type };
     setVerticalType(newType);
   };

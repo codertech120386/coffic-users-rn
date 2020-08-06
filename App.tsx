@@ -12,6 +12,9 @@ import CouponContextProvider from "./context/CouponContext";
 
 import { getUrl } from "./config";
 import { getItem } from "./helper_functions";
+import FilterContextProvider from "./context/FilterContext";
+import SearchTermContextProvider from "./context/SearchTermContext";
+import ShowVerticalListContextProvider from "./context/ShowVerticalListContext";
 
 const getToken = async () => {
   const token = await getItem("cofficToken");
@@ -68,11 +71,17 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-      <CouponContextProvider>
-        <ApolloProvider client={client}>
-          <AppNavigator />
-        </ApolloProvider>
-      </CouponContextProvider>
+      <FilterContextProvider>
+        <SearchTermContextProvider>
+          <ShowVerticalListContextProvider>
+            <CouponContextProvider>
+              <ApolloProvider client={client}>
+                <AppNavigator />
+              </ApolloProvider>
+            </CouponContextProvider>
+          </ShowVerticalListContextProvider>
+        </SearchTermContextProvider>
+      </FilterContextProvider>
     </AuthContextProvider>
   );
 }

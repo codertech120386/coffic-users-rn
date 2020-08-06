@@ -13,3 +13,4 @@ export { GoogleLogoIcon } from "./GoogleLogo";
 export { EmailIcon } from "./Email";
 export { CreateNewAccountIcon } from "./CreateNewAccount";
 export { SignedUpThumbsUp } from "./SignedUpThumbsUp";
+export { SearchPageCofficLogo } from "./SearchPageCofficLogo";

@@ -341,6 +341,7 @@ const WorkspaceSpaceTypePlans = (props: IWorkspaceSpaceTypePlanProps) => {
             </View>
           </View>
         )}
+
         {/* ----- Subscription Action Button ------ */}
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity

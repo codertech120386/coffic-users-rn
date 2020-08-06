@@ -1,4 +1,4 @@
-export const FILTERS = [
+export const FILTERS: string[] = [
   "Property type",
   "Space type",
   "Amenities",
