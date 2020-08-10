@@ -7,6 +7,8 @@ export interface IIdWithDate {
 export interface IAmenity extends IIdWithDate {
   name: string;
   icon_url: string;
+  icon_name: string;
+  icon_provider: any;
 }
 
 export interface IWorkspaceBanner extends IIdWithDate {

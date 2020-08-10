@@ -281,7 +281,13 @@ const WorkspaceDetailsScreen = (props: any) => {
                       </View>
                       {amenities && amenities.length > 9 && (
                         <TouchableOpacity onPress={redirectToAmenitiesList}>
-                          <CustomText style={defaultStyles.extraSmall}>
+                          <CustomText
+                            style={{
+                              ...defaultStyles.extraSmall,
+                              color: Colors.primary,
+                              fontFamily: FONTSTYLES.semiBold,
+                            }}
+                          >
                             More
                           </CustomText>
                         </TouchableOpacity>
@@ -319,6 +325,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     backgroundColor: "white",
+    paddingBottom: 50,
   },
   workspaceImage: {
     width: "100%",

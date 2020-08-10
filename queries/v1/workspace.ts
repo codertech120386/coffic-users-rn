@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const V1_WORKSPACE_DETAILS_FROM_ID = gql`
   query v1WorkspaceFromId($id: ID!) {
@@ -11,6 +11,8 @@ export const V1_WORKSPACE_DETAILS_FROM_ID = gql`
         id
         name
         icon_url
+        icon_name
+        icon_provider
         created_at
         updated_at
       }

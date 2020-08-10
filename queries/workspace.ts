@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const WORKSPACES = gql`
   {
@@ -142,6 +142,8 @@ export const GET_WORKSPACE_AMENITIES = gql`
         id
         name
         icon_url
+        icon_provider
+        icon_name
       }
     }
   }
